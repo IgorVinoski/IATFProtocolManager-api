@@ -1,3 +1,6 @@
-[] CRUD COMPLETO (EDITAR E DELETAR)
-[] Fazer a tela Monitoring se tornar um CALENDÁRIO, com base nas datas do protocolo IATF...
-[] Fazer a tela Reports tornar o lugar onde da pra confirmar ou não a prenhez do animal quando ela tiver nessa data ela aparece ali ou depois do tempo de gestao confirmar se de tudo certo
+[] CRUD COMPLETO (EDITAR E DELETAR) (testar)
+[X] Fazer a tela Monitoring se tornar um CALENDÁRIO, com base nas datas do protocolo IATF...
+[cancelado] Fazer a tela Reports tornar o lugar onde da pra confirmar ou não a prenhez do animal quando ela tiver nessa data ela aparece ali ou depois do tempo de gestao confirmar se de tudo certo
+[] quando nao tem protocolos, alterar a mensagem "No protocols found. Create your first protocol by clicking the "New Protocol" button."
+[] adicionar uma mensagem tambem para quando nao tiver a de aniamis, semelhante a de protocolo.
+[] tela de erro 404
