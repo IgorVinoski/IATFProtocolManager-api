@@ -1,8 +1,8 @@
 class Animal {
-  constructor({ id, name, tagNumber, breed, weight, age, reproductiveHistory, imageUrl }) {
+  constructor({ id, name, tag_number, breed, weight, age, reproductiveHistory, imageUrl }) {
     this.id = id;
     this.name = name;
-    this.tagNumber = tagNumber;
+    this.tagNumber = tag_number;
     this.breed = breed;
     this.weight = weight;
     this.age = age;
