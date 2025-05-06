@@ -5,33 +5,13 @@ async function getAllAnimals() {
   const { rows } = await pool.query('SELECT * FROM animals');
   return rows.map(row => new Animal(row));
 }
-export async function createAnimal(req, res) {
-  try {
-    console.log("Recebido POST /api/animals", req.body);
 
-    // Valide aqui: se algum campo for obrigatório, jogue erro
-    const { tagNumber, name, breed, weight, age } = req.body;
-    if (!tagNumber || !name) {
-      return res.status(400).json({ error: 'Dados incompletos' });
-    }
-
-    const animal = await prisma.animal.create({
-      data: {
-        tagNumber,
-        name,
-        breed,
-        weight: parseFloat(weight),
-        age: parseInt(age),
-        reproductiveHistory: req.body.reproductiveHistory || '',
-        imageUrl: req.body.imageUrl || '',
-      }
-    });
-
-    return res.status(201).json(animal);
-  } catch (err) {
-    console.error("Erro ao criar animal:", err);
-    return res.status(500).json({ error: 'Erro interno ao criar animal' });
-  }
+async function createAnimal({ name, tagNumber, breed, weight, age, reproductiveHistory, imageUrl }) {
+  const { rows } = await pool.query(
+    'INSERT INTO animals (name, tag_number, breed, weight, age, reproductive_history, image_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+    [name, tagNumber, breed, weight, age, reproductiveHistory, imageUrl]
+  );
+  return new Animal(rows[0]);
 }
 
 
