@@ -19,7 +19,7 @@ async function getAllProtocols() {
 
 async function createProtocol({ name, startDate, hormones, bull, notifications, animals = [] }) {
   const { rows } = await pool.query(
-    'INSERT INTO protocols (name, start_date, hormones, bull, notifications) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+    'INSERT INTO protocols (name, startDate, hormones, bull, notifications) VALUES ($1, $2, $3, $4, $5) RETURNING *',
     [name, startDate, hormones, bull, notifications]
   );
   const protocol = rows[0];
