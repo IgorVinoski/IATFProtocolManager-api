@@ -24,7 +24,7 @@ async function destroy(req, res) {
   const { id } = req.params;
   const deleted = await animalUseCases.deleteAnimal(id);
   if (deleted) {
-    res.status(204).send(); // 204 No Content para indicar sucesso na deleção
+    res.status(204).send(); 
   } else {
     res.status(404).json({ message: 'Animal não encontrado' });
   }

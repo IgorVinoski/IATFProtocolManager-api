@@ -1,11 +1,9 @@
-// controllers/authController.js
 const jwt = require('jsonwebtoken');
 const userUseCases = require('../usecases/userUseCases');
-require('dotenv').config(); // Garante que as variáveis de ambiente sejam carregadas
-
+require('dotenv').config(); 
 const generateToken = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.JWT_SECRET, {
-    expiresIn: '1h', // Token expira em 1 hora
+    expiresIn: '1h', 
   });
 };
 
