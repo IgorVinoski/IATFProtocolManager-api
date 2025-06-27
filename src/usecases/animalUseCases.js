@@ -28,15 +28,13 @@ async function updateAnimal(id, { name, tagNumber, breed, weight, age, reproduct
 
 async function deleteAnimal(id) {
   try {
-    // Excluir os registros na tabela de junção (protocol_animals) primeiro
     await pool.query('DELETE FROM protocol_animals WHERE animal_id = $1', [id]);
 
-    // Agora, excluir o animal da tabela animals
     const { rowCount } = await pool.query('DELETE FROM animals WHERE id = $1', [id]);
     return rowCount > 0;
   } catch (error) {
     console.error('Erro ao deletar animal e seus relacionamentos:', error);
-    throw error; // Rejeitar o erro para que o controller possa lidar com ele
+    throw error; 
   }
 }
 async function getAnimalsStats() {

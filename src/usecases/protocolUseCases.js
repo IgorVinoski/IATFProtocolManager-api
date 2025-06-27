@@ -57,10 +57,8 @@ async function updateProtocol(id, { name, startDate, hormones, bull, notificatio
   }
   const updatedProtocol = rows[0];
 
-  // Remove as associações de animais existentes para este protocolo
   await pool.query('DELETE FROM protocol_animals WHERE protocol_id = $1', [id]);
 
-  // Adiciona as novas associações de animais
   for (const animal of animals) {
     await pool.query(
       'INSERT INTO protocol_animals (protocol_id, animal_id, pregnant) VALUES ($1, $2, $3)',

@@ -36,24 +36,21 @@ async function findUserById(id) {
   return result.rows[0];
 }
 
-// FUNÇÃO ATUALIZADA: Atualizar dados do usuário, incluindo o cargo
 async function updateUser(id, newData) {
   try {
-    const { name, email, password, role } = newData; // Inclua 'role' aqui
-    let queryText = 'UPDATE users SET name = $1, email = $2, role = $3'; // Adicione role
-    const queryParams = [name, email, role, id]; // name, email, role, id (id is always last)
-    let paramIndex = 4; // Index para o 'id' na cláusula WHERE se não tiver password
+    const { name, email, password, role } = newData; 
+    let queryText = 'UPDATE users SET name = $1, email = $2, role = $3'; 
+    const queryParams = [name, email, role, id]; 
+    let paramIndex = 4; 
 
-    // Se uma nova senha for fornecida, hash e adicione à consulta
     if (password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-      queryText += `, password = $${paramIndex}`; // Adicione campo password
-      queryParams.splice(3, 0, hashedPassword); // Insira hashedPassword antes do 'id'
-      paramIndex++; // Incremente paramIndex porque adicionamos um parâmetro
+      queryText += `, password = $${paramIndex}`; 
+      queryParams.splice(3, 0, hashedPassword); 
+      paramIndex++; 
     }
 
-    // A cláusula WHERE sempre usará o último parâmetro na lista de queryParams como o ID
     queryText += ` WHERE id = $${paramIndex} RETURNING id, name, email, role`;
 
     const result = await pool.query(queryText, queryParams);

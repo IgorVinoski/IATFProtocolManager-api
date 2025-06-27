@@ -30,11 +30,9 @@ async function getUserProfile(req, res) {
 // @access  Private (requer autenticação)
 async function updateUserProfile(req, res) {
   const userId = req.user.id;
-  // Inclua 'role' na desestruturação do corpo da requisição
   const { name, email, password, role } = req.body;
 
   try {
-    // Passe 'role' para o caso de uso
     const updatedUser = await userUseCases.updateUser(userId, { name, email, password, role });
 
     res.json({
